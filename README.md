@@ -24,7 +24,7 @@ for new links, or other tasks that don't involve posting/submitting data.
 
 Snuze has the following requirements:
 
-* The [PHP](https://www.php.net/downloads.php) 7.2 or newer, capable of running from the command line
+* [PHP](https://www.php.net/downloads.php) 7.2 or newer, capable of running from the command line
 * [Composer](https://getcomposer.org/download/) to handle installation and create the autoloader
 * A Reddit account
 
