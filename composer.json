@@ -1,0 +1,28 @@
+{
+    "name": "snuze/snuze",
+    "description": "Snuze is a PHP client for the Reddit API",
+    "keywords": ["php","reddit","api"],
+    "homepage": "https://github.com/snuze/snuze/",
+    "readme": "https://github.com/snuze/snuze/blob/master/README.md",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Shaun Cummiskey",
+            "email": "shaun@shaunc.com",
+            "homepage": "https://shaunc.com/",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "docs": "https://snuze.shaunc.com/"
+    },
+    "require": {
+        "parseword/pickset": "^1.0",
+        "php": ">=7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "snuze\\": "src"
+        }
+    }
+}
