@@ -185,7 +185,7 @@ class RequestSender extends SnuzeObject
                         "Request failed; requested object was not found. "
                         . "Code: {$httpCode}, Response: {$response}");
             }
-            else if ($httpCode === 500) {
+            else if ($httpCode >= 500 && $httpCode < 600) {
                 throw new \snuze\Exception\ServerErrorException($this,
                         "Request failed; Reddit API server error. "
                         . "Code: {$httpCode}, Response: {$response}");
