@@ -183,7 +183,7 @@ class Listing extends \snuze\SnuzeObject implements \Countable, \IteratorAggrega
         }
 
         /* Next, ensure the 'children' element is present in the JSON */
-        if (empty($j['data']['children'])) {
+        if (!isset($j['data']['children'])) {
             throw new \snuze\Exception\RuntimeException($this,
                     "Expected ['data']['children'] element missing from JSON");
         }
