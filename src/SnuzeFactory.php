@@ -33,7 +33,7 @@ class SnuzeFactory
 
     /**
      * The PHP extensions that must be installed/available for the Snuze core
-     * components to work. A storage provider, if used, may define its own
+     * components to work. A storage provider, if enabled, may define its own
      * additional required extensions.
      */
     const REQUIRED_EXTS = ['curl'];
@@ -62,6 +62,13 @@ class SnuzeFactory
         'storage.parameters' => ['filename' => 'snuze.sqlite'],
     ];
 
+    /**
+     * Constructor. Accepts an array of configuration parameters.
+     *
+     * @param array $parameters
+     * @throws \UnexpectedValueException
+     * @see https://snuze.shaunc.com/docs/configuration/ Config parameter docs
+     */
     public function __construct(array $parameters) {
 
         /* Don't accept unrecognized parameters */
@@ -88,6 +95,12 @@ class SnuzeFactory
         }
     }
 
+    /**
+     * Build and return a configured Snuze instance.
+     *
+     * @return \snuze\Snuze A configured Snuze instance
+     * @throws \RuntimeException
+     */
     public function getSnuze(): \snuze\Snuze {
 
         /* Test PHP version */
@@ -134,6 +147,9 @@ class SnuzeFactory
     /**
      * Initialize the file logger. There's no return; the logger class is a
      * singleton.
+     *
+     * @return void
+     * @throws \UnexpectedValueException
      */
     private function initializeLogger(): void {
 
