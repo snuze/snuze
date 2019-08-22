@@ -41,8 +41,8 @@ abstract class Request extends \snuze\SnuzeObject
      * Don't edit these values unless you have a phenomenally good reason.
      */
     const API_URIS = [
-        'unauthenticated' => 'https://www.reddit.com',
-        'authenticated'   => 'https://oauth.reddit.com',
+        'unauthenticated' => "https://www.reddit.com",
+        'authenticated'   => "https://oauth.reddit.com",
     ];
 
     /**
