@@ -509,21 +509,20 @@ class Subreddit extends Thing
     }
 
     /**
-     * Unknown
+     * Get this subreddit's Community Awards coin balance. If the subreddit
+     * has no Community Awards coins, this will be 0.
      *
      * @return int
-     * @todo verify what exactly this corresponds to
      */
     public function getCoins(): int {
         return $this->coins;
     }
 
     /**
-     * Unknown
+     * Set this subreddit's Community Awards coin balance.
      *
      * @param int $coins
      * @return $this
-     * @todo verify what exactly this corresponds to
      */
     public function setCoins(int $coins) {
         $this->coins = $coins;
