@@ -43,6 +43,24 @@ class HotLinks extends Links
      */
     const PARAM_GEO = 'g';
 
+    /**
+     * Define an array of acceptable values for PARAM_GEO.
+     *
+     * @see https://www.reddit.com/dev/api/#GET_hot
+     */
+    const GEO_VALUES = [
+        'GLOBAL', 'AR', 'AU', 'BG', 'CA', 'CL', 'CO', 'CZ', 'FI', 'GB', 'GR',
+        'HR', 'HU', 'IE', 'IN', 'IS', 'JP', 'MX', 'MY', 'NZ', 'PH', 'PL',
+        'PR', 'PT', 'RO', 'RS', 'SE', 'SG', 'TH', 'TR', 'TW', 'US', 'US_AK',
+        'US_AL', 'US_AR', 'US_AZ', 'US_CA', 'US_CO', 'US_CT', 'US_DC', 'US_DE',
+        'US_FL', 'US_GA', 'US_HI', 'US_IA', 'US_ID', 'US_IL', 'US_IN', 'US_KS',
+        'US_KY', 'US_LA', 'US_MA', 'US_MD', 'US_ME', 'US_MI', 'US_MN', 'US_MO',
+        'US_MS', 'US_MT', 'US_NC', 'US_ND', 'US_NE', 'US_NH', 'US_NJ', 'US_NM',
+        'US_NV', 'US_NY', 'US_OH', 'US_OK', 'US_OR', 'US_PA', 'US_RI', 'US_SC',
+        'US_SD', 'US_TN', 'US_TX', 'US_UT', 'US_VA', 'US_VT', 'US_WA', 'US_WI',
+        'US_WV', 'US_WY'
+    ];
+
     public function __construct(string $subredditName) {
 
         /* All Links children must call parent ctor */
@@ -63,22 +81,9 @@ class HotLinks extends Links
 
         /*
          * If PARAM_GEO is set, check that its value is permissible.
-         * @see https://www.reddit.com/dev/api/#GET_hot
          */
         if (!empty($this->getParameter(self::PARAM_GEO))) {
-            $geoValues = [
-                'GLOBAL', 'AR', 'AU', 'BG', 'CA', 'CL', 'CO', 'CZ', 'FI', 'GB', 'GR',
-                'HR', 'HU', 'IE', 'IN', 'IS', 'JP', 'MX', 'MY', 'NZ', 'PH', 'PL',
-                'PR', 'PT', 'RO', 'RS', 'SE', 'SG', 'TH', 'TR', 'TW', 'US', 'US_AK',
-                'US_AL', 'US_AR', 'US_AZ', 'US_CA', 'US_CO', 'US_CT', 'US_DC', 'US_DE',
-                'US_FL', 'US_GA', 'US_HI', 'US_IA', 'US_ID', 'US_IL', 'US_IN', 'US_KS',
-                'US_KY', 'US_LA', 'US_MA', 'US_MD', 'US_ME', 'US_MI', 'US_MN', 'US_MO',
-                'US_MS', 'US_MT', 'US_NC', 'US_ND', 'US_NE', 'US_NH', 'US_NJ', 'US_NM',
-                'US_NV', 'US_NY', 'US_OH', 'US_OK', 'US_OR', 'US_PA', 'US_RI', 'US_SC',
-                'US_SD', 'US_TN', 'US_TX', 'US_UT', 'US_VA', 'US_VT', 'US_WA', 'US_WI',
-                'US_WV', 'US_WY'
-            ];
-            if (!in_array($this->getParameter(self::PARAM_GEO), $geoValues)) {
+            if (!in_array($this->getParameter(self::PARAM_GEO), self::GEO_VALUES)) {
                 throw new \snuze\Exception\ArgumentException($this,
                         "Unsupported value '{$this->getParameter(self::PARAM_GEO)}' "
                         . 'for parameter: ' . self::PARAM_GEO);
