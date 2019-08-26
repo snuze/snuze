@@ -187,6 +187,9 @@ class Listing extends \snuze\SnuzeObject implements \Countable, \IteratorAggrega
             throw new \snuze\Exception\RuntimeException($this,
                     "Expected ['data']['children'] element missing from JSON");
         }
+        if (empty($j['data']['children'])) {
+            $this->info("JSON ['data']['children'] element was empty, no results?");
+        }
 
         /* Attempt to turn all the Things into objects */
         foreach ($j['data']['children'] as $thing) {
@@ -197,7 +200,6 @@ class Listing extends \snuze\SnuzeObject implements \Countable, \IteratorAggrega
 
             /* What kind of Thing is this? */
             switch ($thing['kind']) {
-
 
                 case Thing::KIND_COMMENT:
                     //@todo not yet implemented
