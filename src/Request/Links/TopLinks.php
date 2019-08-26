@@ -40,6 +40,13 @@ class TopLinks extends Links
      */
     const PARAM_TIME = 't';
 
+    /**
+     * Define an array of acceptable values for PARAM_TIME.
+     *
+     * @see https://www.reddit.com/dev/api/#GET_controversial
+     */
+    const TIME_VALUES = ['hour', 'day', 'week', 'month', 'year', 'all'];
+
     public function __construct(string $subredditName) {
 
         /* All Links children must call parent ctor */
@@ -65,8 +72,7 @@ class TopLinks extends Links
         parent::validate();
 
         /* PARAM_TIME must be set to one of several predefined values */
-        if (!in_array($this->getParameter(self::PARAM_TIME),
-                        ['hour', 'day', 'week', 'month', 'year', 'all'])) {
+        if (!in_array($this->getParameter(self::PARAM_TIME), self::TIME_VALUES)) {
             throw new \snuze\Exception\ArgumentException($this,
                     "Unsupported value '{$this->getParameter(self::PARAM_TIME)}' "
                     . 'for parameter: ' . self::PARAM_TIME);
