@@ -317,6 +317,10 @@ class Snuze extends SnuzeObject
      * than 1, a separate API request will be made for each link, with each one
      * counting against the rate limit.
      *
+     * This method doesn't work on subreddits with the "allow this subreddit to
+     * be exposed to users in /r/all, /r/popular, default, and trending lists"
+     * preference disabled.
+     *
      * @param string $subredditName The target subreddit's name e.g. "funny"
      * @param int $limit Optional. The maximum number of links to retrieve.
      *      Values from 1 to 100 are acceptable; if not set, defaults to 1.
