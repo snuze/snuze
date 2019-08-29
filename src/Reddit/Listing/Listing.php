@@ -42,8 +42,25 @@ use snuze\{
 class Listing extends \snuze\SnuzeObject implements \Countable, \IteratorAggregate, \snuze\Interfaces\Jsonable
 {
 
+    /**
+     * An "after" (next page begins after) specifier, as a thing fullname
+     *
+     * @var string|null
+     */
     private $after = null;
+
+    /**
+     * A "before" (previous page ends before) specifier, as a thing fullname
+     *
+     * @var string|null
+     */
     private $before = null;
+
+    /**
+     * A modification hash to mitigate CSRF. This is only used in toJson().
+     *
+     * @var string|null
+     */
     private $modhash = null;
 
     /**
@@ -65,11 +82,36 @@ class Listing extends \snuze\SnuzeObject implements \Countable, \IteratorAggrega
      */
     protected $_sourceJson = '';
 
+    /**
+     * Constructor.
+     */
     public function __construct() {
 
         /* All SnuzeObject subtypes must call parent ctor */
         parent::__construct();
         $this->debug('ctor args: ' . var_export(func_get_args(), true));
+    }
+
+    /**
+     * Get this listing's "after" specifier, if any. If a value is returned, it
+     * corresponds to the fullname of the last entity in the collection, and can
+     * be used for forward pagination.
+     *
+     * @return string|null
+     */
+    public function getAfter(): ?string {
+        return $this->after;
+    }
+
+    /**
+     * Get this listing's "before" specifier, if any. If a value is returned, it
+     * corresponds to the fullname of the first entity in the collection, and can
+     * be used for reverse pagination.
+     *
+     * @return string|null
+     */
+    public function getBefore(): ?string {
+        return $this->before;
     }
 
     /**

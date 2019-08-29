@@ -192,6 +192,9 @@ class Snuze extends SnuzeObject
      *      to retrieve results after, akin to "next page"
      * @param string $before Optional. The fullname e.g. "t3_cevca2" of a link
      *      to retrieve results before, akin to "previous page"
+     * @param int $count Optional. When paging through a subreddit, set this to
+     *      the number of links that have already been retrieved. Use in
+     *      combination with $after or $before.
      * @param bool $showAll Optional. If true, disregards any "hide links..."
      *      preferences enabled for the currently authenticated user
      * @param string $period Optional. One of 'hour', 'day', 'week', 'month',
@@ -203,15 +206,17 @@ class Snuze extends SnuzeObject
      */
     public function fetchLinksControversial(string $subredditName,
             int $limit = 25, string $after = null, string $before = null,
-            bool $showAll = false, string $period = 'day'): \snuze\Reddit\Listing\LinkListing {
+            int $count = null, bool $showAll = false, string $period = 'day'): \snuze\Reddit\Listing\LinkListing {
 
         $this->info("Requesting controversial links ({$period}) for /r/{$subredditName}");
+        $this->debug(var_export(func_get_args(), true));
 
         /* Build and send a request */
         $request = new Request\Links\ControversialLinks($subredditName);
         $request->addParameter(Request\Links\Links::PARAM_LIMIT, $limit);
         $request->addParameter(Request\Links\Links::PARAM_AFTER, $after);
         $request->addParameter(Request\Links\Links::PARAM_BEFORE, $before);
+        $request->addParameter(Request\Links\Links::PARAM_COUNT, $count);
         if ($showAll === true) {
             $request->addParameter(Request\Links\Links::PARAM_SHOW, 'all');
         }
@@ -237,6 +242,9 @@ class Snuze extends SnuzeObject
      *      to retrieve results after, akin to "next page"
      * @param string $before Optional. The fullname e.g. "t3_cevca2" of a link
      *      to retrieve results before, akin to "previous page"
+     * @param int $count Optional. When paging through a subreddit, set this to
+     *      the number of links that have already been retrieved. Use in
+     *      combination with $after or $before.
      * @param bool $showAll Optional. If true, disregards any "hide links..."
      *      preferences enabled for the currently authenticated user
      * @param string $locality Optional. A locality code for which to request
@@ -249,16 +257,18 @@ class Snuze extends SnuzeObject
      * @see https://www.reddit.com/dev/api/#GET_hot for valid locality codes
      */
     public function fetchLinksHot(string $subredditName, int $limit = 25,
-            string $after = null, string $before = null, bool $showAll = false,
-            string $locality = null): \snuze\Reddit\Listing\LinkListing {
+            string $after = null, string $before = null, int $count = null,
+            bool $showAll = false, string $locality = null): \snuze\Reddit\Listing\LinkListing {
 
         $this->info("Requesting hot links for /r/{$subredditName}");
+        $this->debug(var_export(func_get_args(), true));
 
         /* Build and send a request */
         $request = new Request\Links\HotLinks($subredditName);
         $request->addParameter(Request\Links\Links::PARAM_LIMIT, $limit);
         $request->addParameter(Request\Links\Links::PARAM_AFTER, $after);
         $request->addParameter(Request\Links\Links::PARAM_BEFORE, $before);
+        $request->addParameter(Request\Links\Links::PARAM_COUNT, $count);
         if ($showAll === true) {
             $request->addParameter(Request\Links\Links::PARAM_SHOW, 'all');
         }
@@ -285,6 +295,9 @@ class Snuze extends SnuzeObject
      *      to retrieve results after, akin to "next page"
      * @param string $before Optional. The fullname e.g. "t3_cevca2" of a link
      *      to retrieve results before, akin to "previous page"
+     * @param int $count Optional. When paging through a subreddit, set this to
+     *      the number of links that have already been retrieved. Use in
+     *      combination with $after or $before.
      * @param bool $showAll Optional. If true, disregards any "hide links..."
      *      preferences enabled for the currently authenticated user
      * @return \snuze\Reddit\Listing\LinkListing A LinkListing object
@@ -292,15 +305,18 @@ class Snuze extends SnuzeObject
      *      single Reddit link. The LinkListing is iterable.
      */
     public function fetchLinksNew(string $subredditName, int $limit = 25,
-            string $after = null, string $before = null, bool $showAll = false): \snuze\Reddit\Listing\LinkListing {
+            string $after = null, string $before = null, int $count = null,
+            bool $showAll = false): \snuze\Reddit\Listing\LinkListing {
 
         $this->info("Requesting new links for /r/{$subredditName}");
+        $this->debug(var_export(func_get_args(), true));
 
         /* Build and send a request */
         $request = new Request\Links\NewLinks($subredditName);
         $request->addParameter(Request\Links\Links::PARAM_LIMIT, $limit);
         $request->addParameter(Request\Links\Links::PARAM_AFTER, $after);
         $request->addParameter(Request\Links\Links::PARAM_BEFORE, $before);
+        $request->addParameter(Request\Links\Links::PARAM_COUNT, $count);
         if ($showAll === true) {
             $request->addParameter(Request\Links\Links::PARAM_SHOW, 'all');
         }
@@ -376,6 +392,9 @@ class Snuze extends SnuzeObject
      *      to retrieve results after, akin to "next page"
      * @param string $before Optional. The fullname e.g. "t3_cevca2" of a link
      *      to retrieve results before, akin to "previous page"
+     * @param int $count Optional. When paging through a subreddit, set this to
+     *      the number of links that have already been retrieved. Use in
+     *      combination with $after or $before.
      * @param bool $showAll Optional. If true, disregards any "hide links..."
      *      preferences enabled for the currently authenticated user
      * @return \snuze\Reddit\Listing\LinkListing A LinkListing object
@@ -383,15 +402,18 @@ class Snuze extends SnuzeObject
      *      single Reddit link. The LinkListing is iterable.
      */
     public function fetchLinksRising(string $subredditName, int $limit = 25,
-            string $after = null, string $before = null, bool $showAll = false): \snuze\Reddit\Listing\LinkListing {
+            string $after = null, string $before = null, int $count = null,
+            bool $showAll = false): \snuze\Reddit\Listing\LinkListing {
 
         $this->info("Requesting rising links for /r/{$subredditName}");
+        $this->debug(var_export(func_get_args(), true));
 
         /* Build and send a request */
         $request = new Request\Links\RisingLinks($subredditName);
         $request->addParameter(Request\Links\Links::PARAM_LIMIT, $limit);
         $request->addParameter(Request\Links\Links::PARAM_AFTER, $after);
         $request->addParameter(Request\Links\Links::PARAM_BEFORE, $before);
+        $request->addParameter(Request\Links\Links::PARAM_COUNT, $count);
         if ($showAll === true) {
             $request->addParameter(Request\Links\Links::PARAM_SHOW, 'all');
         }
@@ -415,6 +437,9 @@ class Snuze extends SnuzeObject
      *      to retrieve results after, akin to "next page"
      * @param string $before Optional. The fullname e.g. "t3_cevca2" of a link
      *      to retrieve results before, akin to "previous page"
+     * @param int $count Optional. When paging through a subreddit, set this to
+     *      the number of links that have already been retrieved. Use in
+     *      combination with $after or $before.
      * @param bool $showAll Optional. If true, disregards any "hide links..."
      *      preferences enabled for the currently authenticated user
      * @param string $period Optional. One of 'hour', 'day', 'week', 'month',
@@ -425,16 +450,18 @@ class Snuze extends SnuzeObject
      *      single Reddit link. The LinkListing is iterable.
      */
     public function fetchLinksTop(string $subredditName, int $limit = 25,
-            string $after = null, string $before = null, bool $showAll = false,
-            string $period = 'day'): \snuze\Reddit\Listing\LinkListing {
+            string $after = null, string $before = null, int $count = null,
+            bool $showAll = false, string $period = 'day'): \snuze\Reddit\Listing\LinkListing {
 
         $this->info("Requesting top links ({$period}) for /r/{$subredditName}");
+        $this->debug(var_export(func_get_args(), true));
 
         /* Build and send a request */
         $request = new Request\Links\TopLinks($subredditName);
         $request->addParameter(Request\Links\Links::PARAM_LIMIT, $limit);
         $request->addParameter(Request\Links\Links::PARAM_AFTER, $after);
         $request->addParameter(Request\Links\Links::PARAM_BEFORE, $before);
+        $request->addParameter(Request\Links\Links::PARAM_COUNT, $count);
         if ($showAll === true) {
             $request->addParameter(Request\Links\Links::PARAM_SHOW, 'all');
         }
