@@ -40,7 +40,7 @@ class Snuze extends SnuzeObject
     /**
      * The Snuze build number.
      */
-    const VERSION = 1000705; /* 0.7.5 */
+    const VERSION = 1000706; /* 0.7.6 */
 
     /**
      * An AuthenticationState object. This holds the Reddit credentials and
