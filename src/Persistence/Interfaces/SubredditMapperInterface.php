@@ -44,7 +44,7 @@ interface SubredditMapperInterface extends MapperInterface
      * Reddit "thing" ID, *without* "t5_" prepended, e.g. "2tlk9".
      *
      * @param string $id The subreddit's Reddit ID *without* "t5_" prepended
-     * @return \snuze\Reddit\AccessToken|null
+     * @return \snuze\Reddit\Thing\Subreddit|null
      */
     public function retrieveById(string $id): ?\snuze\Reddit\Thing\Subreddit;
 }
