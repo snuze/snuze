@@ -1,13 +1,13 @@
 /**
  * This file contains DDL statements to build the full Snuze MySQL schema,
- * version: 1000705 (Snuze 0.7.5).
+ * version: 1000800 (Snuze 0.8.0).
  *
  * The statements in this file should only be run once, when you first 
  * set up your MySQL database to use with Snuze. (Or if you decide to nuke
  * everything and start fresh.)
  * 
- * When upgrading Snuze to a new version, a series of smaller .sql files will 
- * appear in this directory. These are patch files, which contain the database 
+ * When upgrading Snuze to a new version, a series of smaller .sql files may 
+ * appear in this directory. Those are patch files, which contain the database 
  * schema changes between Snuze versions. When Snuze detects that the schema
  * is out of data, it will prompt you with instructions to apply the patches.
  *
@@ -30,14 +30,14 @@
  * limitations under the License.
  */
 --
-CREATE TABLE IF NOT EXISTS `snuze` (
+CREATE TABLE `snuze` (
     `schema_version` MEDIUMINT UNSIGNED NOT NULL,
     PRIMARY KEY(`schema_version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 --
-INSERT `snuze` (`schema_version`) VALUES(1000705);
+INSERT `snuze` (`schema_version`) VALUES(1000800);
 --
-CREATE TABLE IF NOT EXISTS `access_tokens` (
+CREATE TABLE `access_tokens` (
     `username` VARCHAR(32) NOT NULL,
     `access_token` VARCHAR(64) NOT NULL,
     `expires` INTEGER UNSIGNED NOT NULL,
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `access_tokens` (
     PRIMARY KEY(`username`, `access_token`, `expires`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 --
-CREATE TABLE IF NOT EXISTS `subreddits` (
+CREATE TABLE `subreddits` (
     id VARCHAR(16) NOT NULL,
     display_name VARCHAR(24) NOT NULL,
     accounts_active MEDIUMINT UNSIGNED NOT NULL DEFAULT 0,
@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `subreddits` (
     INDEX `ix_display_name`(`display_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 --
-CREATE TABLE IF NOT EXISTS `links`(
+CREATE TABLE `links`(
     `id` VARCHAR(16) NOT NULL,
     `created` INTEGER NOT NULL,
     `created_utc` INTEGER NOT NULL,
@@ -262,4 +262,26 @@ CREATE TABLE IF NOT EXISTS `links`(
     INDEX `ix_created`(`created`),
     INDEX `ix_subreddit`(`subreddit`),
     INDEX `ix_subreddit_id`(`subreddit_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+--
+CREATE TABLE `accounts`(
+    `id` VARCHAR(16) NOT NULL,
+    `created` INTEGER NOT NULL,
+    `created_utc` INTEGER NOT NULL,
+    `comment_karma` INTEGER NOT NULL DEFAULT 0,
+    `has_subscribed` BIT(1) NOT NULL DEFAULT 1,
+    `has_verified_email` BIT(1) NOT NULL DEFAULT 0,
+    `hide_from_robots` BIT(1) NOT NULL DEFAULT 0,
+    `icon_img` VARCHAR(255) NOT NULL DEFAULT '',
+    `is_employee` BIT(1) NOT NULL DEFAULT 0,
+    `is_friend` BIT(1) NOT NULL DEFAULT 0,
+    `is_gold` BIT(1) NOT NULL DEFAULT 0,
+    `is_mod` BIT(1) NOT NULL DEFAULT 0,
+    `link_karma` INTEGER NOT NULL DEFAULT 0,
+    `name` VARCHAR(24) NOT NULL,
+    `pref_show_snoovatar` BIT(1) NOT NULL DEFAULT 0,
+    `subreddit` TEXT NULL,
+    `verified` BIT(1) NOT NULL DEFAULT 0,
+    PRIMARY KEY(`id`),
+    INDEX `ix_name`(`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

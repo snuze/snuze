@@ -62,7 +62,7 @@ class StorageProvider extends \snuze\Persistence\AbstractStorageProvider impleme
      * own storage provider, you're welcome to mirror this design, but it's not
      * a required feature of a Snuze storage provider in general.
      */
-    const SCHEMA_VERSION = 1000705;
+    const SCHEMA_VERSION = 1000800;
 
     /**
      * The MySQL server hostname or IP address

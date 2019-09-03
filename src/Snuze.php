@@ -40,7 +40,7 @@ class Snuze extends SnuzeObject
     /**
      * The Snuze build number.
      */
-    const VERSION = 1000706; /* 0.7.6 */
+    const VERSION = 1000800; /* 0.8.0 */
 
     /**
      * An AuthenticationState object. This holds the Reddit credentials and
@@ -621,6 +621,16 @@ class Snuze extends SnuzeObject
                     'Storage is not enabled. This feature is unavailable.');
         }
         return $this->storage->getMapper($objectClass);
+    }
+
+    /**
+     * Get an AccountMapper from the storage provider to facilitate persisting
+     * and retrieving accounts.
+     *
+     * @return \snuze\Persistence\Interfaces\AccountMapperInterface
+     */
+    public function getAccountMapper(): \snuze\Persistence\Interfaces\AccountMapperInterface {
+        return $this->getStorageMapper('Account');
     }
 
     /**
