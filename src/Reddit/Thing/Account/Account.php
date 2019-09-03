@@ -39,9 +39,9 @@ abstract class Account extends \snuze\Reddit\Thing\Thing
     /**
      * A regular expression used to test whether or not an account username is
      * valid. Usernames must be between 3 and 20 characters long and may contain
-     * only alphanumerics and underscores.
+     * only alphanumerics, hyphens, and underscores.
      */
-    const REGEX_VALID_NAME = '|^[a-z0-9_]{3,20}$|i';
+    const REGEX_VALID_NAME = '|^[a-z0-9_\-]{3,20}$|i';
 
     /**
      * The account's internal Reddit identifier, e.g. "bva6"
@@ -58,9 +58,10 @@ abstract class Account extends \snuze\Reddit\Thing\Thing
     protected $commentKarma = 0;
 
     /**
-     * Whether or not this account has ever had Reddit Gold
+     * Unknown
      *
      * @var bool
+     * @todo verify what exactly this corresponds to
      */
     protected $hasSubscribed = true;
 
@@ -138,10 +139,10 @@ abstract class Account extends \snuze\Reddit\Thing\Thing
     protected $subreddit = null;
 
     /**
-     * Whether or not this account has been verified by Reddit admins as
-     * actually belonging to the person or organization it claims to be
+     * Unknown (always true?)
      *
      * @var bool
+     * @todo verify what exactly this corresponds to
      */
     protected $verified = false;
 
@@ -166,19 +167,21 @@ abstract class Account extends \snuze\Reddit\Thing\Thing
     }
 
     /**
-     * Get whether or not this account has ever had Reddit Gold
+     * Unknown
      *
      * @return bool
+     * @todo verify what exactly this corresponds to
      */
     public function getHasSubscribed(): bool {
         return $this->hasSubscribed;
     }
 
     /**
-     * Set whether or not this account has ever had Reddit Gold
+     * Unknown
      *
      * @param bool $hasSubscribed
      * @return $this
+     * @todo verify what exactly this corresponds to
      */
     protected function setHasSubscribed(bool $hasSubscribed) {
         $this->hasSubscribed = $hasSubscribed;
@@ -398,21 +401,21 @@ abstract class Account extends \snuze\Reddit\Thing\Thing
     }
 
     /**
-     * Get whether or not this account has been verified by Reddit admins as
-     * actually belonging to the person or organization it claims to be
+     * Unknown (always true?)
      *
      * @return bool
+     * @todo verify what exactly this corresponds to
      */
     public function getVerified(): bool {
         return $this->verified;
     }
 
     /**
-     * Set whether or not this account has been verified by Reddit admins as
-     * actually belonging to the person or organization it claims to be
+     * Unknown (always true?)
      *
      * @param bool $verified
      * @return $this
+     * @todo verify what exactly this corresponds to
      */
     protected function setVerified(bool $verified) {
         $this->verified = $verified;
