@@ -129,6 +129,7 @@ class Link extends Thing
     protected $sendReplies = false;
     protected $spam = null;
     protected $spoiler = false;
+    protected $stewardReports = [];
     protected $stickied = false;
     protected $subreddit = '';
     protected $subredditId = '';
@@ -1624,6 +1625,8 @@ class Link extends Thing
      * this link is posted.
      *
      * @return array
+     * @see getStewardReports()
+     * @see getUserReports()
      */
     public function getModReports(): array {
         return $this->modReports;
@@ -2213,6 +2216,36 @@ class Link extends Thing
     }
 
     /**
+     * Get an array defining any reports that have been lodged against this
+     * link by... stewards? (Can't find an announcement of this as of 20190908)
+     *
+     * This is a moderator-only property. To receive an accurate value, the
+     * currently authenticated user must be a moderator of the subreddit where
+     * this link is posted.
+     *
+     * @return array
+     * @see getModReports()
+     * @see getUserReports()
+     * @todo verify what exactly this corresponds to
+     */
+    public function getStewardReports(): array {
+        return $this->stewardReports;
+    }
+
+    /**
+     * Set an array defining any reports that have been lodged against this
+     * link by... stewards? (Can't find an announcement of this as of 20190908)
+     *
+     * @param array $stewardReports
+     * @return $this
+     * @todo verify what exactly this corresponds to
+     */
+    public function setStewardReports(array $stewardReports) {
+        $this->stewardReports = $stewardReports;
+        return $this;
+    }
+
+    /**
      * Get whether or not this link is stickied at the top of the subreddit
      *
      * @return bool
@@ -2515,6 +2548,7 @@ class Link extends Thing
      *
      * @return array
      * @see getModReports()
+     * @see getStewardReports()
      */
     public function getUserReports(): array {
         return $this->userReports;

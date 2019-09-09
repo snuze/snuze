@@ -192,6 +192,7 @@ class LinkMapper extends \snuze\SnuzeObject implements LinkMapperInterface
                     ,send_replies
                     ,spam
                     ,spoiler
+                    ,steward_reports
                     ,stickied
                     ,subreddit
                     ,subreddit_id
@@ -307,6 +308,7 @@ class LinkMapper extends \snuze\SnuzeObject implements LinkMapperInterface
                     ,:send_replies
                     ,:spam
                     ,:spoiler
+                    ,:steward_reports
                     ,:stickied
                     ,:subreddit
                     ,:subreddit_id
@@ -421,6 +423,7 @@ class LinkMapper extends \snuze\SnuzeObject implements LinkMapperInterface
                     ,send_replies = VALUES(send_replies)
                     ,spam = VALUES(spam)
                     ,spoiler = VALUES(spoiler)
+                    ,steward_reports = VALUES(steward_reports)
                     ,stickied = VALUES(stickied)
                     ,subreddit = VALUES(subreddit)
                     ,subreddit_id = VALUES(subreddit_id)
@@ -630,6 +633,10 @@ EOT;
                     \PDO::PARAM_BOOL);
             $stmt->bindValue(':spam', $link->getSpam(), \PDO::PARAM_BOOL);
             $stmt->bindValue(':spoiler', $link->getSpoiler(), \PDO::PARAM_BOOL);
+            $stmt->bindValue(':steward_reports',
+                    is_null($link->getstewardReports()) ? null : json_encode($link->getstewardReports(),
+                                    JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION),
+                    \PDO::PARAM_STR);
             $stmt->bindValue(':stickied', $link->getStickied(), \PDO::PARAM_BOOL);
             $stmt->bindValue(':subreddit', $link->getSubreddit(),
                     \PDO::PARAM_STR);
@@ -778,6 +785,7 @@ EOT;
             'report_reasons',
             'secure_media',
             'secure_media_embed',
+            'steward_reports',
             'user_reports',
         ];
         foreach ($arrayFields as $field) {
