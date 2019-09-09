@@ -1,6 +1,6 @@
 /**
  * This file contains DDL statements to build the full Snuze MySQL schema,
- * version: 1000800 (Snuze 0.8.0).
+ * version: 1000801 (Snuze 0.8.1).
  *
  * The statements in this file should only be run once, when you first 
  * set up your MySQL database to use with Snuze. (Or if you decide to nuke
@@ -35,7 +35,7 @@ CREATE TABLE `snuze` (
     PRIMARY KEY(`schema_version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 --
-INSERT `snuze` (`schema_version`) VALUES(1000800);
+INSERT `snuze` (`schema_version`) VALUES(1000801);
 --
 CREATE TABLE `access_tokens` (
     `username` VARCHAR(32) NOT NULL,
@@ -88,6 +88,7 @@ CREATE TABLE `subreddits` (
     hide_ads BIT(1) NOT NULL DEFAULT 0,
     icon_img VARCHAR(128) NULL,
     icon_size VARCHAR(12) NULL,
+    is_crosspostable_subreddit BIT(1) NULL,
     is_enrolled_in_new_modmail BIT(1) NULL,
     key_color VARCHAR(8) NULL,
     lang VARCHAR(8) NOT NULL DEFAULT 'en',
@@ -239,6 +240,7 @@ CREATE TABLE `links`(
     `send_replies` BIT(1) NOT NULL DEFAULT 0,
     `spam` BIT(1) NULL DEFAULT 0,
     `spoiler` BIT(1) NOT NULL DEFAULT 0,
+    `steward_reports` TEXT NULL,
     `stickied` BIT(1) NOT NULL DEFAULT 0,
     `subreddit` VARCHAR(24) NOT NULL,
     `subreddit_id` VARCHAR(16) NOT NULL,
