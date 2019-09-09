@@ -7,6 +7,6 @@ ALTER TABLE `links`
 ADD COLUMN `steward_reports` TEXT NULL AFTER `spoiler`;
 --
 ALTER TABLE `subreddits`
-ADD COLUMN `is_crosspostable_subreddit` BIT(1) NOT NULL DEFAULT 0 AFTER `icon_size`;
+ADD COLUMN `is_crosspostable_subreddit` BIT(1) NULL DEFAULT 0 AFTER `icon_size`;
 --
 UPDATE `snuze` SET `schema_version` = 1000801;
