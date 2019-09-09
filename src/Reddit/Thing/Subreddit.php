@@ -86,6 +86,7 @@ class Subreddit extends Thing
     protected $hideAds = false;
     protected $iconImg = '';
     protected $iconSize = null;
+    protected $isCrosspostableSubreddit = null;
     protected $isEnrolledInNewModmail = null;
     protected $keyColor = '';
     protected $lang = '';
@@ -980,6 +981,29 @@ class Subreddit extends Thing
      */
     protected function setIconSize(array $iconSize = null) {
         $this->iconSize = $iconSize;
+        return $this;
+    }
+
+    /**
+     * Get whether or not this subreddit has the "Allow crossposting of posts"
+     * preference enabled. If crossposting is disabled, the Reddit API returns
+     * null instead of false; this method mirrors that behavior.
+     *
+     * @return bool|null
+     */
+    public function getIsCrosspostableSubreddit(): ?bool {
+        return $this->isCrosspostableSubreddit;
+    }
+
+    /**
+     * Set whether or not this subreddit has the "Allow crossposting of posts"
+     * preference enabled.
+     *
+     * @param bool $isCrosspostableSubreddit
+     * @return $this
+     */
+    public function setIsCrosspostableSubreddit(bool $isCrosspostableSubreddit = null) {
+        $this->isCrosspostableSubreddit = $isCrosspostableSubreddit;
         return $this;
     }
 

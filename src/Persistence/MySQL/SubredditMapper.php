@@ -138,6 +138,7 @@ class SubredditMapper extends \snuze\SnuzeObject implements SubredditMapperInter
                     ,hide_ads
                     ,icon_img
                     ,icon_size
+                    ,is_crosspostable_subreddit
                     ,is_enrolled_in_new_modmail
                     ,key_color
                     ,lang
@@ -232,6 +233,7 @@ class SubredditMapper extends \snuze\SnuzeObject implements SubredditMapperInter
                     ,:hide_ads
                     ,:icon_img
                     ,:icon_size
+                    ,:is_crosspostable_subreddit
                     ,:is_enrolled_in_new_modmail
                     ,:key_color
                     ,:lang
@@ -324,6 +326,7 @@ class SubredditMapper extends \snuze\SnuzeObject implements SubredditMapperInter
                     ,hide_ads = VALUES(hide_ads)
                     ,icon_img = VALUES(icon_img)
                     ,icon_size = VALUES(icon_size)
+                    ,is_crosspostable_subreddit = VALUES(is_crosspostable_subreddit)
                     ,is_enrolled_in_new_modmail = VALUES(is_enrolled_in_new_modmail)
                     ,key_color = VALUES(key_color)
                     ,lang = VALUES(lang)
@@ -467,6 +470,8 @@ EOT;
                     is_null($subreddit->getIconSize()) ? null : json_encode($subreddit->getIconSize(),
                                     JSON_UNESCAPED_SLASHES | JSON_PRESERVE_ZERO_FRACTION),
                     \PDO::PARAM_STR);
+            $stmt->bindValue(':is_crosspostable_subreddit',
+                    $subreddit->getIsCrosspostableSubreddit(), \PDO::PARAM_BOOL);
             $stmt->bindValue(':is_enrolled_in_new_modmail',
                     $subreddit->getIsEnrolledInNewModmail(), \PDO::PARAM_BOOL);
             $stmt->bindValue(':key_color', $subreddit->getKeyColor(),
@@ -635,6 +640,7 @@ EOT;
             'free_form_reports',
             'has_menu_widget',
             'hide_ads',
+            'is_crosspostable_subreddit',
             'is_enrolled_in_new_modmail',
             'link_flair_enabled',
             'original_content_tag_enabled',
