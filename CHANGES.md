@@ -1,5 +1,13 @@
 # Snuze Changelog
 
+## v0.8.1 (September 8, 2019)
+
+Enhancements/Changes:
+
+- Add support for new `steward_reports` attribute in links
+
+- Add support for new `is_crosspostable_subreddit` attribute in subreddits
+
 ## v0.8.0 (September 3, 2019)
 
 Enhancements/Changes:
